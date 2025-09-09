@@ -11,6 +11,9 @@ const contributorsEl = document.querySelector('#entry-contributors-wrapper')
 const gitHubEl = document.createElement("i")
 gitHubEl.ariaLabel = "GitHub:"
 gitHubEl.className = "bi bi-github"
+const discordEl = document.createElement("i")
+discordEl.ariaLabel = "Discord:"
+discordEl.className = "bi bi-discord"
 
 fetch('all-authors.txt')
 	.then(response => response.text())
@@ -22,14 +25,18 @@ fetch('all-authors.txt')
 	.then(contributors => {
 		document.querySelector('#contributors-count').textContent = contributors.length
 		for (const contributor of contributors) {
-			const userEl = document.createElement('a')
 			const contributorSplit = contributor.split(':')
+			const userEl = document.createElement(contributorSplit[0] === "dc" ? 'span' : 'a')
 			if (contributorSplit[0] === "gh") {
 				const contributor1 = contributorSplit[1]
 				userEl.href = 'https://github.com/' + contributor1
 				userEl.appendChild(gitHubEl.cloneNode())
 				userEl.appendChild(document.createTextNode(' ' + contributor1))
 				//                        punctuation space ^
+			} else if (contributorSplit[0] === "dc") {
+				const contributor1 = contributorSplit[1]
+				userEl.appendChild(discordEl.cloneNode())
+				userEl.appendChild(document.createTextNode(' ' + contributor1))
 			} else {
 				userEl.href = 'https://reddit.com/user/' + contributor
 				userEl.textContent = contributor
