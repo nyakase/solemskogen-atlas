@@ -42,7 +42,7 @@ const variationsConfig = {
 		default: 0,
 		drawablePeriods: [0, 0],
 		drawableRegions: [
-			[[0, 0], [2000, -1000, 1499, 999]],
+			[[0, 0], [0, 0, canvasSize.x, canvasSize.y]],
 		],
 		versions: [
 			{
