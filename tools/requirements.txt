@@ -2,3 +2,5 @@ praw
 tqdm
 humanize
 Pillow
+numpy
+opencv-python
