@@ -10,7 +10,7 @@ from oneoff.calculate_center import polylabel
 from oneoff.calculate_polygon import pongon
 
 # constants
-top_left_tile = [1085,594]
+top_left_tile = [1084,594]
 bottom_right_tile = [1086,595]
 canvas_offset = [0,0]
 
@@ -55,10 +55,11 @@ for tile in tiles:
 		id = f"{name.replace(" ","")}_{x}_{y}"
 		seal = f"https://seal.hakase.life/{tile[0]}%20{tile[1]}/{template["href"]}"
 
+		print("Downloading",seal)
 		pillow_template = Image.open(io.BytesIO(requests.get(seal).content)).convert("RGBA")
 		canvas.paste(pillow_template, (x, y), pillow_template)
 
-		if seal in existing_atlas_seals or name == "roads":
+		if seal in existing_atlas_seals or name == "roads" or name.endswith(" bg"):
 			continue
 
 		#polygon = [ # TODO: this is dumb lol

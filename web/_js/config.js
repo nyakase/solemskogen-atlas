@@ -18,7 +18,7 @@ const pageTitle = "The 2023 r/place Atlas"
 window.pageTitle = pageTitle
 
 const canvasSize = {
-	x: 2000,
+	x: 3000,
 	y: 2000
 }
 window.canvasSize = canvasSize
