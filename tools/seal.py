@@ -50,8 +50,8 @@ for tile in tiles:
 			continue
 
 		# atlas data
-		x = int(template_data.group(1)) + ((tile[0]-top_left_tile[0])*1000) + canvas_offset[0] - canvas_crop[0]
-		y = int(template_data.group(2)) + ((tile[1]-top_left_tile[1])*1000) + canvas_offset[1] - canvas_crop[1]
+		x = int(template_data.group(1)) + ((tile[0]-top_left_tile[0])*1000) - canvas_crop[0]
+		y = int(template_data.group(2)) + ((tile[1]-top_left_tile[1])*1000) - canvas_crop[1]
 		name = os.path.splitext(urllib.parse.unquote(template_data.group(3)))[0]
 		id = f"{name.replace(" ","")}_{x}_{y}"
 		seal = f"https://seal.hakase.life/{tile[0]}%20{tile[1]}/{template["href"]}"
@@ -69,7 +69,7 @@ for tile in tiles:
 		#	[x+pillow_template.size[0], y+pillow_template.size[1]],
 		#	[x+pillow_template.size[0], y]
 		#]
-		polygon = pongon(pillow_template, x, y)
+		polygon = pongon(pillow_template, x+canvas_offset[0], y+canvas_offset[1])
 
 		new_atlas_items.append({
 			"id": id,
