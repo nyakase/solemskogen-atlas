@@ -13,6 +13,8 @@ from oneoff.calculate_polygon import pongon
 top_left_tile = [1084,594]
 bottom_right_tile = [1086,595]
 canvas_offset = [0,0]
+canvas_crop = [927,34,1493,1727] # the first two (left,top) affect template locations, the last two (right,bottom) are actual crops
+							#^ wysi
 
 tile_regex = re.compile(r"(\d+)%20(\d+)\/")
 template_regex = re.compile(r"(\d+)%20(\d+)%20(.+)")
@@ -49,8 +51,8 @@ for tile in tiles:
 			continue
 
 		# atlas data
-		x = int(template_data.group(1)) + ((tile[0]-top_left_tile[0])*1000) + canvas_offset[0]
-		y = int(template_data.group(2)) + ((tile[1]-top_left_tile[1])*1000) + canvas_offset[1]
+		x = int(template_data.group(1)) + ((tile[0]-top_left_tile[0])*1000) + canvas_offset[0] - canvas_crop[0]
+		y = int(template_data.group(2)) + ((tile[1]-top_left_tile[1])*1000) + canvas_offset[1] - canvas_crop[1]
 		name = os.path.splitext(urllib.parse.unquote(template_data.group(3)))[0]
 		id = f"{name.replace(" ","")}_{x}_{y}"
 		seal = f"https://seal.hakase.life/{tile[0]}%20{tile[1]}/{template["href"]}"
@@ -84,6 +86,6 @@ for tile in tiles:
 		})
 
 atlas_data.extend(new_atlas_items)
-canvas.save("web/_img/canvas/seal/base.png", format="PNG")
+canvas.crop([0,0,canvas_crop[2],canvas_crop[3]]).save("web/_img/canvas/seal/base.png", format="PNG")
 with open('web/atlas.json', 'w', encoding='utf-8') as atlas_file:
 	per_line_entries(atlas_data, atlas_file)
