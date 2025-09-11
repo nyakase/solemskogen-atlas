@@ -39,9 +39,6 @@ Hereforth is an example of the structured entry data. The example has been expan
 	}, 
 	"center": {
 		"0": [254.0, 1027.0]
-	},
-	"center": {
-		"0": [1639, 1754]
 	}
 }
 ```
