@@ -14,6 +14,9 @@ gitHubEl.className = "bi bi-github"
 const discordEl = document.createElement("i")
 discordEl.ariaLabel = "Discord:"
 discordEl.className = "bi bi-discord"
+const nameEl = document.createElement("i")
+nameEl.ariaLabel = "Name:"
+nameEl.className = "bi bi-person-fill"
 
 fetch('all-authors.txt')
 	.then(response => response.text())
@@ -26,7 +29,7 @@ fetch('all-authors.txt')
 		document.querySelector('#contributors-count').textContent = contributors.length
 		for (const contributor of contributors) {
 			const contributorSplit = contributor.split(':')
-			const userEl = document.createElement(contributorSplit[0] === "dc" ? 'span' : 'a')
+			const userEl = document.createElement('a')
 			if (contributorSplit[0] === "gh") {
 				const contributor1 = contributorSplit[1]
 				userEl.href = 'https://github.com/' + contributor1
@@ -37,9 +40,10 @@ fetch('all-authors.txt')
 				const contributor1 = contributorSplit[1]
 				userEl.appendChild(discordEl.cloneNode())
 				userEl.appendChild(document.createTextNode(' ' + contributor1))
-			} else {
-				userEl.href = 'https://reddit.com/user/' + contributor
-				userEl.textContent = contributor
+			} else if (contributorSplit[0] === "nm") {
+				const contributor1 = contributorSplit[1]
+				userEl.appendChild(nameEl.cloneNode())
+				userEl.appendChild(document.createTextNode(' ' + contributor1))
 			}
 			userEl.target = '_blank'
 			userEl.rel = 'noreferrer'
