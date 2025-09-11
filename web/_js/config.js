@@ -2,19 +2,16 @@
 // Please also check code indicated with "@instanceonly" outside this file.
 // TODO: Avoid having instance-only code inside the main scripts to make updating easier.
 
-const prodDomain = "2023.place-atlas.stefanocoding.me"
+const prodDomain = "skogen.hakase.life"
 window.prodDomain = prodDomain
 
-const instanceId = "2023"
+const instanceId = "skogen"
 window.instanceId = instanceId
 
-const instanceSubreddit = "placeAtlas2023"
-window.instanceSubreddit = instanceSubreddit
-
-const instanceRepo = "https://github.com/placeAtlas/atlas-2023"
+const instanceRepo = "https://github.com/nyakase/solemskogen-atlas"
 window.instanceRepo = instanceRepo
 
-const pageTitle = "The 2023 r/place Atlas"
+const pageTitle = "Solemskogen Atlas"
 window.pageTitle = pageTitle
 
 const canvasSize = {
@@ -56,10 +53,10 @@ const variationsConfig = {
 window.variationsConfig = variationsConfig
 
 const giscusConfig = {
-    repo: "placeAtlas/atlas-2023",
-    repoId: "R_kgDOJyrvYg",
+    repo: "nyakase/solemskogen-atlas",
+    repoId: "R_kgDOPscKeQ",
     category: "Entry Discussion",
-    categoryId: "DIC_kwDOJyrvYs4Cn1UC",
+    categoryId: "DIC_kwDOPscKec4CvSVf",
     mapping: "specific",
     strict: "1",
 	term: "{ENTRY_ID}",
@@ -126,58 +123,28 @@ const externalLinksConfig = [
 		}
 	},
 	{
-		name: "Subreddit",
-		id: "subreddit",
-		generateLink: (link) => "https://reddit.com/r/" + link,
-		listingClass: "bi-reddit",
-		generateListingName: (link) => "r/" + link,
-		editorPrefix: "reddit.com/",
-		placeholder: "pJkm23b2nA",
+		name: "SEAL",
+		id: "seal",
+		generateLink: (link) => link,
+		generateListingName: () => "Template",
+		listingClass: "bi-file-earmark-image-fill",
+		editorPrefix: "",
+		placeholder: "https://seal.hakase.life/tile/template.png",
 		configureInputField: (inputField) => {
-			inputField.placeholder = "r/example"
-			inputField.pattern = "^r\/[A-Za-z0-9][A-Za-z0-9_]{1,50}$"
-			inputField.title = "Subreddit in format of r/example"
-			inputField.minLength = "4"
-			inputField.maxLength = "50"
-		},
-		extractId: (content) => {
-			const subredditPattern = /^(?:(?:(?:(?:(?:https?:\/\/)?(?:(?:www|old|new|np)\.)?)?reddit\.com)?\/)?[rR]\/)?([A-Za-z0-9][A-Za-z0-9_]{1,20})(?:\/[^" ]*)*$/
-			id = content.trim().match(subredditPattern)?.[1]
-			if (id) {
-				return id;
-			}
-			return content;
-		},
-		formatIdInEditor: (content) => {
-			if (content != "") {
-				return "r/" + content;
-			}
-			return "";
+			inputField.placeholder = "https://seal.hakase.life/tile/template.png"
 		}
-	},
-	{
-		name: "Wiki",
-		id: "wiki",
-		generateLink: (link) => "https://place-wiki.stefanocoding.me/wiki/" + link,
-		listingClass: "bi-wiki",
-		generateListingName: () => "r/place Wiki Article",
-		displayHTML: "{urlid}",
-		placeholder: "r/place Wiki Article",
-		configureInputField: () => {},
-		hideInput: true
-	},
+	}
 ];
 
 
-console.info(`%cThe 2023 r/place Atlas
+console.info(`%cSolemskogen Atlas
 %cCopyright (c) 2017 Roland Rytz <roland@draemm.li>
 Copyright (c) 2023 Place Atlas Initiative and contributors
-Licensed under AGPL-3.0 (https://2023.place-atlas.stefanocoding.me/license.txt)
+Copyright (c) 2025 Nia and Solemskogen Atlas contributors
+Licensed under AGPL-3.0 (https://skogen.hakase.life/license.txt)
 
-https://2023.place-atlas.stefanocoding.me/
-https://discord.gg/pJkm23b2nA
-https://reddit.com/r/placeAtlas2023
-https://github.com/placeAtlas/atlas-2023
+https://skogen.hakase.life/
+https://github.com/nyakase/solemskogen-atlas
 
 To get the image of the canvas, use downloadCanvas().
 `, 'font-size: 150%; line-height: 150%', '')

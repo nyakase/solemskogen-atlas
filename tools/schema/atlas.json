@@ -36,16 +36,6 @@
 					"type": "object",
 					"description": "The links related to the entry.",
 					"properties": {
-						"subreddit": {
-							"type": "array",
-							"description": "Subreddits that's either most relevant to the topic, or that was responsible for creating the artwork, excluding the r/.",
-							"items": {
-								"type": "string",
-								"description": "A subreddit that's either most relevant to the topic, or that was responsible for creating the artwork.",
-								"pattern": "^[A-Za-z0-9][A-Za-z0-9_]{1,20}$",
-								"minItems": 1
-							}
-						},
 						"website": {
 							"type": "array",
 							"description": "URL to websites related to the entry, including the http/https protocol. If you're describing a project, the project's main website would be suitable here.",
@@ -66,14 +56,14 @@
 								"minLength": 1
 							}
 						},
-						"wiki": {
+						"seal": {
 							"type": "array",
-							"description": "Wiki pages related to the entry.",
+							"description": "URLs to SEAL templates used for the entry.",
 							"items": {
 								"type": "string",
-								"description": "The title of the wiki page related to the entry.",
-								"minItems": 1,
-								"minLength": 1
+								"description": "The URL to a SEAL template used for the entry.",
+								"pattern": "^https?://seal\\.hakase\\.life/\\d+%20\\d+/\\d+%20\\d+%20.+\\.png$",
+								"minItems": 1
 							}
 						}
 					},

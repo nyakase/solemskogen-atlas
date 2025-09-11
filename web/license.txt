@@ -1,3 +1,6 @@
+The following license applies to all files EXCEPT the ones under the
+_img/canvas directory, which cannot currently be copylefted.
+
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 

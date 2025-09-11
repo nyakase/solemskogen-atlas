@@ -28,7 +28,7 @@ with open('web/atlas.json', 'r', encoding='utf-8') as atlas_file:
 	atlas_data = json.loads(atlas_file.read())
 	existing_atlas_seals = []
 	for entry in atlas_data:
-		for seal in entry["seal"]:
+		for seal in entry["links"]["seal"]:
 			existing_atlas_seals.append(seal)
 
 # figure out which SEAL tiles we can work with
@@ -75,13 +75,15 @@ for tile in tiles:
 			"id": id,
 			"name": name,
 			"description": "FIXME",
+			"links": {
+				"seal": [seal]
+			},
 			"path": {
 				"0": polygon
 			},
 			"center": {
 				"0": polylabel(polygon)
 			},
-			"seal": [seal]
 		})
 
 atlas_data.extend(new_atlas_items)

@@ -1,90 +1,19 @@
 # Contributing
 
-This project is open-source, and contributions are welcome. In fact, the Atlas relies on user contributions.
+This project is open-source, and contributions are welcome. In fact, the Atlas relies on user contributions. You may contribute to the project by submitting issues and pull requests on the GitHub repo or by asking for help in [the "Solemskogen Atlas" thread on #forums in Elemental on Discord](https://discord.gg/SeyrmAWt7P).
 
-You may contribute to the project by submitting a Pull Request on the GitHub repo or sending your submissions through [Reddit](https://www.reddit.com/r/placeAtlas2023). Other than that, you can get help from [Discord](https://discord.gg/pJkm23b2nA) or [Reddit](https://www.reddit.com/r/placeAtlas2023).
+## New entries
 
-## New Atlas entries
+Entries are *initially* auto-generated using the [SEAL template collection](https://seal.hakase.life). This is a compromise so I can track art on Wplace for other projects without duplicating work, and so that the canvas does not need extensive, frequent updating.
 
-To contribute to the map, we require a certain format for artwork region and labels. This can be generated on [the drawing mode](https://2023.place-atlas.stefanocoding.me?mode=draw) on the website. 
+You can send your template to me as an issue on this GitHub repository or in the Discord thread. You need to include the template, its name, and its [Blue Marble coordinates](github.com/SwingTheVine/Wplace-BlueMarble). For the atlas, you can also specify a description and relevant website like a wiki page. If you want to [be credited](https://skogen.hakase.life/about.html#entry-contributors) for adding an entry to the atlas, include your name or social media account as well.
 
-To add a new entry, go to [the drawing mode](https://2023.place-atlas.stefanocoding.me?mode=draw) and draw a shape/polygon around the region you'd like to describe. You can use the <kbd>Undo</kbd>, <kbd>Redo</kbd>, and <kbd>Reset</kbd> buttons to help you creating a good polygon. Make sure that the lines you're drawing don't form a [self-intersecting polygon](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Complex_polygon.svg/288px-Complex_polygon.svg.png).
+You can see examples of templates by [browsing the collection](https://seal.hakase.life). You might notice that **a template must be split up by tile**. If you do not have isolated and split template(s), ask for help in the Discord thread or create one yourself with an image editor (my editor of choice is [Aseprite](https://www.aseprite.org/)). Please make sure to erase any pixels that have been overlapped with different artwork on Wplace for tracking reasons.
 
-If you want to see which areas of the canvas do not have entries yet, select "Highlight Empty" to hide areas that already have entries.
+## Manual editing
+In rare cases editing entries manually is preferred. For example, it may make sense to add a big block of small pride flags to the SEAL collection, but this is bad for documenting on the Atlas and separate entries should be created as well. As another example, since the SEAL generator cannot handle split templates, entries may need to be merged into one entry with a single path.
 
-Multiple periods can be added to represent the changing state of the artwork on different times. You can set the start and end period, as well as chosing the appropriate canvas variations. You can also copy the polygon from one period to the other, duplicating a period to be edited later, as well as deleting a period (if there is more than one). An alert is also shown if there are errors that needed attention.
-
-When you're happy with the shape you've drawn, press <kbd>Finish</kbd>. You will now be able to enter some information about the entry:
-
-- **Name**: A short, descriptive name.
-- **Description**: A short description that can be understood by somebody not familiar with the topic. If you were involved in drawing this artwork, you may include the meta, describing the process of drawing the artwork in the event. To include lengthy, additional information, consider creating a page on [the r/place Wiki](https://place-wiki.stefanocoding.me/).
-- **Links**: Some links that are most relevant to the topic, and/or regarding the process of the drawing the artwork in the event.
-	- **Website**: If you're describing a project, the project's main website would be suitable here.
-	- **Subreddit**: Format it like `r/subreddit`.
-	- **Discord**: Write the invite code, that the invite link without the `discord.gg/` part.
-
-All fields but the name are optional. For example, a country flag doesn't necessarily need a description.
-
-Once you've entered all the information, you'll be presented with a pop-up window containing some [JSON](https://en.wikipedia.org/wiki/JSON)-formatted data. This is the patch that you are going to submit. Depending on the method, there are two preferred methods. 
-
-### Through Reddit
-
-You can press the <kbd>Post Direct to Reddit</kbd> button, which will open a page with the title and body already been filled for you. You don't need to change anything what has been prepared.
-
-If that didn't work, copy the entire JSON text and [create a new text post on the subreddit](https://www.reddit.com/r/placeAtlas2023/submit). You don't need to add any other text; just directly send the patch. 
-
-Remember to flair your post with <kbd>New Entry</kbd>. On New Reddit, click the <kbd>Flair</kbd> button on the bottom part, and select <kbd>New Entry</kbd>. On Old Reddit, click the <kbd>select</kbd> button on the "choose a flair" section instead.
-
-### Through GitHub
-
-If you know about Git and how to create a pull request on GitHub, you can try create a patch that will be merged, along with other patches, by one of the members.
-
-You can try pressing the <kbd>Submit Direct to GitHub</kbd> button, which will open a page with the patch file already been prepared to you. 
-
-If that didn't work, copy the entire JSON text and [create a new patch file to the repository through GitHub](https://github.com/placeAtlas/atlas-2023/new/cleanup/data/patches?filename=gh-0000-ENTRY-NAME-HERE.json
-). Upon opening, replace the `ENTRY-NAME-HERE` into the name of the entry (with the slug format, if possible, e.g. `foo-bar`). You don't need to add any other text; just directly send the patch. 
-
-If you haven't forked the repository, you would need to fork it with the provided instruction shown on the page. You may add attribution by adding an `_author` key, explained in the next paragraphs. After that, you can press <kbd>Submit changes</kbd>, add follow the steps to create a pull request within GitHub. 
-
-The commit message and description doesn't matter, but you may change it into something more descriptive to make it easier for checking (e.g. <kbd>Add Foo Bar</kbd> or <kbd>Edit Foo Bar</kbd> for the commit message). However, we suggest you to edit the title (at least) and the description of the pull request, containing the changes that you want to do (something like <kbd>Add Foo Bar</kbd> or <kbd>Edit Foo Bar</kbd> for the title, similar to the commit message, is also sufficient).
-
-If you can fork and clone the repository, you can use the provided `tools/create_patch.py` script. This script helps you to create a working patch, along with additional data such as your name for attribution sakes. Simply run the script inside the `tools/` folder and follow the given instructions. 
-
-If you want to do this manually (e.g. you don't have Python), you can create a patch by creating a `.json` file inside `data/patches`, with the content of the JSON-formatted data that is given earlier. You may add attribution by adding an `_author` key with the value of your Reddit username or your GitHub username plus a `gh:` prefix.
-
-```json5
-{
-	"id": -1,                  // -1 signififies a new entry.
-	// ...
-	// Choose one of the folllowing:
-	"_author": "Hans5958_",    // Links to https://reddit.com/user/Hans5958_
-	"_author": "gh:Hans5958",  // Links to https://github.com/Hans5958
-}
-```
-
-Once you have successfully created the patch, the file can be committed, and a pull request towards the `cleanup` branch can be created. A member will merge the pull request if it is adequate.
-
-## Edits to Atlas entries
-
-Other than adding new ones, you can edit existing atlas entries.
-
-### Using the web interface
-
-You can use the website to edit single entries easily. On the website, click <kbd>Edit</kbd> on an entry box. Afterwards, you are now on the drawing mode, editing the entry, in which you can follow the same instructions as [when creating a new entry](#new-atlas-entries). 
-
-Upon submitting, if you use Reddit, please flair it as <kbd>Edit Entry</kbd> instead. The method stays the same if you use GitHub.
-
-As an alternative, you can also submit an issue on GitHub using [this form](https://github.com/placeAtlas/atlas-2023/issues/new?assignees=&labels=entry+update&template=edit-entry.yml) or report it on our Discord server.
-
-### Manually by direct edits
-
-Direct edits to the `web/atlas.json` are also welcome on this repository using Git through GitHub. You may use Git or GitHub for bulk or large-scale changes, such as removing duplicates, or doing those that are not possible by using patches, such as removing an entry. Keep in mind that this may causes conflicts, so only do it when necessary. 
-
-`web/atlas.json` is where the Atlas data is located, in which you can edit on GitHub. The next section includes an example of an entry.
-
-Upon creating a fork of this repository and pushing the changes, create a pull request towards the `cleanup` branch. A member will merge the pull request if it is adequate.
-
-To help find duplicates, [use the Overlap mode](https://2023.place-atlas.stefanocoding.me?mode=overlap).
+In this case, data can be generated using the Draw or Edit tools on the website and shared on GitHub or Discord.
 
 ### Example
 
@@ -92,35 +21,34 @@ Hereforth is an example of the structured entry data. The example has been expan
 
 ```json5
 {
-	"id": 1,
-	"name": "An entry",
-	"description": "This is an entry, it is remarkable.",
+	"id": "norwegianflag_245_1020",
+	"name": "Norwegian flag",
+	"description": "The flag of Norway, a Scandinavian country.",
 	"links": {
-		"subreddit": ["placeAtlas2023", "subreddit1", "subreddit2"],
-		"discord": ["pJkm23b2nA"],
-		"website": ["https://example.com"],
-		"wiki": ["An_Entry", "An_Entry_2"]
+		"discord": ["SeyrmAWt7P"],
+		"website": ["http://elg.no"],
+		"seal": ["https://seal.hakase.life/1085%20595/171%2053%20norwegian%20flag.png"]
 	},
 	"path": {
-		"109-166, T:0-1": [
-			[1527, 1712],
-			[1625, 1712],
-			[1625, 1682]
+		"0": [
+			[245, 1020], 
+			[245, 1034], 
+			[263, 1034], 
+			[263, 1020]
 		]
+	}, 
+	"center": {
+		"0": [254.0, 1027.0]
 	},
 	"center": {
-		"109-166, T:0-1": [1639, 1754]
+		"0": [1639, 1754]
 	}
 }
 ```
 
-`109-166, T:0-1` has this meaning.
-  - `109-166`: Default canvas variation (r/place), period [109](https://2023.place-atlas.stefanocoding.me/#/109) to [166](https://2023.place-atlas.stefanocoding.me/#/166).
-  - `T:0-1`: "The Final Clean" canvas variation, period [0](https://2023.place-atlas.stefanocoding.me/#/T:0) (The Final Clean) to [1](https://2023.place-atlas.stefanocoding.me/#/T:1) (Unofficial Corrections).
-
 ## Development
 
-Other than contributing to the Atlas data, code contributions are also accepted. Here are some information regarding some aspects on the repository.
+Other than contributing to the Atlas data, code contributions are also accepted. You may want to upstream your contributions to [The r/place 2023 Atlas](https://github.com/placeAtlas/atlas-2023) if it is not Solemskogen-specific. Here are some information regarding some aspects on the repository.
 
 ### Web interface
 
@@ -145,7 +73,7 @@ If you have Visual Studio Code, you can use an extension such as [Live Server](h
 
 The `tools` folder have various scripts for the maintainance of the project, such as...
 
-- Adding submitted entries from the subreddit
+- Generating entries from the SEAL collection
 - Formatting/tidying up the data 
 - Building the site for production
 

@@ -10,7 +10,7 @@ window.addEventListener("error", e => {
 	let errorMessage = "<h4 class=\"mb-3\">An error has occurred:</h4>"
 	errorMessage += "<p class=\"text-danger\">" + e.message + "</p>"
 	errorMessage += "<p class=\"text-danger\">on line " + e.lineno + "</p>"
-	errorMessage += "<p>If this keeps happening, feel free to tell us on <a href=\"https://discord.gg/pJkm23b2nA\">our Discord server</a>.</p>"
+	errorMessage += "<p>If this keeps happening, feel free to tell us on <a href=\"https://discord.gg/SeyrmAWt7P\">our Discord server</a>.</p>"
 	document.getElementById("loadingContent").innerHTML = errorMessage
 })
 
