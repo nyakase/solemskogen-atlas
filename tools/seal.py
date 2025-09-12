@@ -1,9 +1,4 @@
-import re
-import requests
-import json
-import urllib.parse
-import io
-import os.path
+import re, requests, json, zipfile, urllib.parse, io, os.path
 from PIL import Image
 from aformatter import per_line_entries
 from oneoff.calculate_center import polylabel
@@ -15,8 +10,7 @@ bottom_right_tile = [1086,595]
 canvas_offset = [0,0]
 canvas_crop = [926,33,1495,1729] # the first two (left,top) affect template locations, the last two (right,bottom) are actual crops
 
-tile_regex = re.compile(r"(\d+)%20(\d+)\/")
-template_regex = re.compile(r"(\d+)%20(\d+)%20(.+)")
+template_regex = re.compile(r"top\/(\d+) (\d+)\/(\d+) (\d+) (.+)")
 canvas = Image.new("RGBA", [
 	(abs(bottom_right_tile[0] - top_left_tile[0])+1)*1000,
 	(abs(bottom_right_tile[1] - top_left_tile[1])+1)*1000
@@ -31,60 +25,52 @@ with open('web/atlas.json', 'r', encoding='utf-8') as atlas_file:
 		for seal in entry["links"]["seal"]:
 			existing_atlas_seals.append(seal)
 
-# figure out which SEAL tiles we can work with
-root_folder = requests.get("https://seal.hakase.life/?ls").json()
-tiles = []
-for file in root_folder["dirs"]:
-	x = int(tile_regex.match(file["href"]).group(1))
-	y = int(tile_regex.match(file["href"]).group(2))
-
-	if (x >= top_left_tile[0] and x <= bottom_right_tile[0]) and (y >= top_left_tile[1] and y <= bottom_right_tile[1]):
-		tiles.append([x,y])
-
 # start processing tiles
-for tile in tiles:
-	tile_folder = requests.get(f"https://seal.hakase.life/{tile[0]}%20{tile[1]}/?ls").json()
-	for template in tile_folder["files"]:
-		template_data = template_regex.match(template["href"])
-		if not template_data:
-			continue
+seal_zip = zipfile.ZipFile(io.BytesIO(requests.get("https://seal.hakase.life/?zip").content))
+for file in seal_zip.namelist():
+	template_data = template_regex.match(file)
+	if not template_data: 
+		continue
+	
+	# parsed template data
+	tlx = int(template_data.group(1))
+	tly = int(template_data.group(2))
+	tx = int(template_data.group(3))
+	ty = int(template_data.group(4))
+	tname = template_data.group(5)
 
-		# atlas data
-		x = int(template_data.group(1)) + ((tile[0]-top_left_tile[0])*1000) - canvas_crop[0]
-		y = int(template_data.group(2)) + ((tile[1]-top_left_tile[1])*1000) - canvas_crop[1]
-		name = os.path.splitext(urllib.parse.unquote(template_data.group(3)))[0]
-		id = f"{name.replace(" ","")}_{x}_{y}"
-		seal = f"https://seal.hakase.life/{tile[0]}%20{tile[1]}/{template["href"]}"
+	if not (tlx >= top_left_tile[0] and tlx <= bottom_right_tile[0]) or not (tly >= top_left_tile[1] and tly <= bottom_right_tile[1]):
+		continue
 
-		print("Downloading",seal)
-		pillow_template = Image.open(io.BytesIO(requests.get(seal).content)).convert("RGBA")
-		canvas.paste(pillow_template, (x, y), pillow_template)
+	# atlas data
+	x = tx + ((tlx-top_left_tile[0])*1000) - canvas_crop[0]
+	y = ty + ((tly-top_left_tile[1])*1000) - canvas_crop[1]
+	name = os.path.splitext(tname)[0]
+	id = f"{name.replace(" ","")}_{x}_{y}"
+	seal = "https://seal.hakase.life/" + urllib.parse.quote(f"{tlx} {tly}/{tx} {ty} {tname}")
 
-		if seal in existing_atlas_seals or name == "roads" or name.endswith(" bg"):
-			continue
+	pillow_template = Image.open(seal_zip.open(file)).convert("RGBA")
+	canvas.paste(pillow_template, (x, y), pillow_template)
 
-		#polygon = [ # TODO: this is dumb lol
-		#	[x,y],
-		#	[x, y+pillow_template.size[1]],
-		#	[x+pillow_template.size[0], y+pillow_template.size[1]],
-		#	[x+pillow_template.size[0], y]
-		#]
-		polygon = pongon(pillow_template, x+canvas_offset[0], y+canvas_offset[1])
+	if seal in existing_atlas_seals or name == "roads" or name.endswith(" bg"):
+		continue
+	
+	polygon = pongon(pillow_template, x+canvas_offset[0], y+canvas_offset[1])
 
-		new_atlas_items.append({
-			"id": id,
-			"name": name,
-			"description": "FIXME",
-			"links": {
-				"seal": [seal]
-			},
-			"path": {
-				"0": polygon
-			},
-			"center": {
-				"0": polylabel(polygon)
-			},
-		})
+	new_atlas_items.append({
+		"id": id,
+		"name": name,
+		"description": "FIXME",
+		"links": {
+			"seal": [seal]
+		},
+		"path": {
+			"0": polygon
+		},
+		"center": {
+			"0": polylabel(polygon)
+		},
+	})
 
 atlas_data.extend(new_atlas_items)
 canvas.crop([0,0,canvas_crop[2],canvas_crop[3]]).save("web/_img/canvas/seal/base.png", format="PNG")
