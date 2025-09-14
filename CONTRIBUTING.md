@@ -2,18 +2,17 @@
 
 This project is open-source, and contributions are welcome. In fact, the Atlas relies on user contributions. You may contribute to the project by submitting issues and pull requests on the GitHub repo or by asking for help in [the "Solemskogen Atlas" thread on #forums in Elemental on Discord](https://discord.gg/SeyrmAWt7P).
 
-## New entries
+## Adding new artwork
 
 Entries are *initially* auto-generated using the [SEAL template collection](https://seal.hakase.life). This is a compromise so I can track art on Wplace for other projects without duplicating work, and so that the canvas does not need extensive, frequent updating.
 
 You can send your template to me as an issue on this GitHub repository or in the Discord thread. You need to include the template, its name, and its [Blue Marble coordinates](github.com/SwingTheVine/Wplace-BlueMarble). For the atlas, you can also specify a description and relevant website like a wiki page. If you want to [be credited](https://skogen.hakase.life/about.html#entry-contributors) for adding an entry to the atlas, include your name or social media account as well.
 
-You can see examples of templates by [browsing the collection](https://seal.hakase.life). You might notice that **a template must be split up by tile**. If you do not have isolated and split template(s), ask for help in the Discord thread or create one yourself with an image editor (my editor of choice is [Aseprite](https://www.aseprite.org/)). Please make sure to erase any pixels that have been overlapped with different artwork on Wplace for tracking reasons.
+You can see examples of templates by [browsing the collection](https://seal.hakase.life). Since they are organized by tile, I may split your template into parts so that it fits the structure.
 
-## Manual editing
-In rare cases editing entries manually is preferred. For example, it may make sense to add a big block of small pride flags to the SEAL collection, but this is bad for documenting on the Atlas and separate entries should be created as well. As another example, since the SEAL generator cannot handle split templates, entries may need to be merged into one entry with a single path.
+## Editing atlas.json
 
-In this case, data can be generated using the Draw or Edit tools on the website and shared on GitHub or Discord.
+If there is something wrong with the Atlas data besides the artwork itself, or you want to add a sub-entry to a larger entry (like a flag set), you can edit the file or ask me to do so. Using the "Draw" or "Edit" tools on the website can help you with making the polygon.
 
 ### Example
 
