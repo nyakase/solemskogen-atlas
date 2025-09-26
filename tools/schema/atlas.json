@@ -32,6 +32,11 @@
 					"type": "string",
 					"description": "The description of the entry. that will also be understood by somebody not familiar with the topic. Usually, the first sentence on Wikipedia is a good example."
 				},
+				"writers": {
+					"type": "array",
+					"description": "The writers of the description, which will be displayed below it.",
+					"minItems": 1
+				},
 				"links": {
 					"type": "object",
 					"description": "The links related to the entry.",
@@ -110,7 +115,7 @@
 					"minProperties": 1
 				}
 			},
-			"required": ["id", "name", "description", "links", "path", "center"],
+			"required": ["id", "name", "description", "writers", "links", "path", "center"],
 			"additionalItems": true	
 		}
 	},

@@ -229,6 +229,10 @@ body[data-init-done] .listTransitioning #innerContainer {
 	margin-bottom: 0;
 }
 
+#objectWriters a {
+	text-decoration: none;
+}
+
 #exportString {
 	min-height: 300px;
 }

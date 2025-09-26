@@ -1,8 +1,9 @@
 /*!
- * The 2023 r/place Atlas
+ * Solemskogen Atlas
  * Copyright (c) 2017 Roland Rytz <roland@draemm.li>
  * Copyright (c) 2023 Place Atlas Initiative and contributors
- * Licensed under AGPL-3.0 (https://2023.place-atlas.stefanocoding.me/license.txt)
+ * Copyright (c) 2025 Nia and Solemskogen Atlas contributors
+ * Licensed under AGPL-3.0 (https://skogen.hakase.life/license.txt)
  */
 
 const finishButton = document.getElementById("finishButton")
@@ -80,7 +81,7 @@ baseInputField.type = "text"
 let linkEditButtonListener = new WeakMap(); // store the "click" listener of button for later unmapping
 
 let externalLinksConfigIndexById = {};
-let linkGroupElements = {};
+let linkGroupElements = {writers: []};
 for (let i in externalLinksConfig) {
 	externalLinksConfigIndexById[externalLinksConfig[i].id] = i;
 	linkGroupElements[externalLinksConfig[i].id] = []
@@ -280,6 +281,7 @@ function initDraw() {
 			id: entry ? entry.id : -1,
 			name: nameField.value,
 			description: descriptionField.value,
+			writers: [],
 			links: {},
 			path: {},
 			center: {},
@@ -320,6 +322,9 @@ function initDraw() {
 				exportObject.links[linkConfig.id] = exportArray
 			}
 		}
+		exportObject.writers = linkGroupElements.writers
+			.map(element => element.value.trim())
+			.filter(element => element);
 
 		return exportObject
 	}
@@ -539,6 +544,10 @@ function initDraw() {
 	}
 
 	function getLinkConfig(linkTypeId) {
+		if(linkTypeId === "writers") return {
+			editorPrefix: "",
+			configureInputField: () => {}
+		}
 		return externalLinksConfig[externalLinksConfigIndexById[linkTypeId]]
 	}
 
@@ -679,6 +688,9 @@ function initDraw() {
 				clearLinkGroup(linkConfig.id)
 			}
 		}
+		for (const writer of entry.writers) {
+			addFieldGeneric(writer, "writers");
+		}
 		redoButton.disabled = true
 		undoButton.disabled = false
 
@@ -696,6 +708,7 @@ function initDraw() {
 		for (const linkConfig of externalLinksConfig) {
 			clearLinkGroup(linkConfig.id);
 		}
+		clearLinkGroup("writers");
 	}
 
 	initPeriodGroups()

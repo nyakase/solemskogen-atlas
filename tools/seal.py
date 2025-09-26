@@ -61,6 +61,7 @@ for file in seal_zip.namelist():
 		"id": id,
 		"name": name,
 		"description": "FIXME",
+		"writers": ["bot:SEAL"],
 		"links": {
 			"seal": [seal]
 		},

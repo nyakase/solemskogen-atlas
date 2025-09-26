@@ -1,8 +1,9 @@
 /*!
- * The 2023 r/place Atlas
+ * Solemskogen Atlas
  * Copyright (c) 2017 Roland Rytz <roland@draemm.li>
  * Copyright (c) 2023 Place Atlas Initiative and contributors
- * Licensed under AGPL-3.0 (https://2023.place-atlas.stefanocoding.me/license.txt)
+ * Copyright (c) 2025 Nia and Solemskogen Atlas contributors
+ * Licensed under AGPL-3.0 (https://skogen.hakase.life/license.txt)
  */
 
 const baseLinkElement = document.createElement("a")
@@ -12,6 +13,12 @@ baseLinkElement.rel = "noopener noreferrer"
 
 const baseGroupElement = document.createElement("div")
 baseGroupElement.className = "btn-group-vertical"
+
+const writerIcons = {
+	"dc": "discord",
+	"nm": "person-fill",
+	"bot": "robot"
+}
 
 function createLabel(name, value, parent) {
 	const nameElement = document.createElement("span")
@@ -81,6 +88,22 @@ function createInfoBlock(entry, mode = 0) {
 		let formattedDesc = entry.description.replace(/\n{2}/g, '</p><p>')
 		formattedDesc = formattedDesc.replace(/\n/g, '<br>')
 		descElement.innerHTML = '<p>' + formattedDesc + '</p>'
+
+		let writers = ""
+		entry.writers.forEach((writer, index) => {
+			const writerSplit = writer.split(":")
+			if(writerSplit[0] == "gh") {
+				writers += "<a href='https://github.com/" + writerSplit[1] + "'><i class='bi bi-github'></i> " + writerSplit[1] + "</a>"
+			} else {
+				writers += "<i class='bi bi-" + writerIcons[writerSplit[0]] + "'></i> " + writerSplit[1] + "</a>"
+			}
+
+			if(index !== entry.writers.length-1 && entry.writers.length > 2) writers += ","
+			if(entry.writers.length !== 1) writers += " "
+			if(index === entry.writers.length-2) writers += "and "
+		})
+		descElement.innerHTML += '<p id="objectWriters" class="blockquote-footer m-0">' + writers + '</p>'
+
 		bodyElement.appendChild(descElement)
 	}
 
