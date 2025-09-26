@@ -23,6 +23,7 @@ Hereforth is an example of the structured entry data. The example has been expan
 	"id": "norwegianflag_245_1020",
 	"name": "Norwegian flag",
 	"description": "The flag of Norway, a Scandinavian country.",
+	"writers": ["gh:nyakase"],
 	"links": {
 		"discord": ["SeyrmAWt7P"],
 		"website": ["http://elg.no"],
