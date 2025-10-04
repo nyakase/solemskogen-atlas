@@ -22,7 +22,7 @@ with open('web/atlas.json', 'r', encoding='utf-8') as atlas_file:
 	atlas_data = json.loads(atlas_file.read())
 	existing_atlas_seals = []
 	for entry in atlas_data:
-		for seal in entry["links"]["seal"]:
+		for seal in entry["links"].get("seal", []):
 			existing_atlas_seals.append(seal)
 
 # start processing tiles
@@ -48,6 +48,9 @@ for file in seal_zip.namelist():
 	name = os.path.splitext(tname)[0]
 	id = f"{name.replace(" ","")}_{x}_{y}"
 	seal = "https://seal.hakase.life/" + urllib.parse.quote(f"{tlx} {tly}/{tx} {ty} {tname}")
+
+	if x < 0 or y < 0:
+		continue
 
 	pillow_template = Image.open(seal_zip.open(file)).convert("RGBA")
 	canvas.paste(pillow_template, (x, y), pillow_template)
