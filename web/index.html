@@ -204,7 +204,7 @@
 				</header>
 				<div id="offcanvasDraw-drawControls" class="offcanvas-body">
 					<div id="hint">
-						<p><b>You probably don't want this,</b> contributing to Solemskogen Atlas works differently for most entries. Please see the <a href="https://github.com/nyakase/solemskogen-atlas/blob/main/CONTRIBUTING.md">contributing guide</a>.</a></p>
+						<p><b>You probably don't want this,</b> contributing to Solemskogen Atlas works differently for most entries. Please see the <a href="https://github.com/nyakase/solemskogen-atlas/blob/main/CONTRIBUTING.md" target="_blank">contributing guide</a>.</p>
 						<div class="text-white p-3 rounded shadow" style="background-color: #5865F2;">
 							<h6>Need Help?</h6>
 							<p class="mb-0">You can ask for help on <a class="link-light" href="https://discord.gg/SeyrmAWt7P" target="_blank" rel="noreferrer">the "Solemskogen Atlas" thread on #forums in EoD</a>!</p>
@@ -283,7 +283,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body d-flex flex-column">
-					<p>Here is your entry data. You can now share it on GitHub or Discord. If sharing on Discord, it is recommended to paste the data into a <a href="https://pastebin.com">pastebin</a> so the chat is not flooded (it might be too long to be sendable anyways). See the <a href="https://github.com/nyakase/solemskogen-atlas/blob/main/CONTRIBUTING.md">contributing guide</a> for more information.</a></p>
+					<p>Here is your entry data. You can now share it on GitHub or Discord. See the <a href="https://github.com/nyakase/solemskogen-atlas/blob/main/CONTRIBUTING.md" target="_blank">contributing guide</a> for more information.</p>
 					<textarea class="form-control flex-grow-1" cols="40" rows="20" id="exportString" title="Raw JSON string" readonly></textarea>
 				</div>
 				<div class="modal-footer">
@@ -338,6 +338,27 @@
 				</div>
 			</div>
 		</template>
+
+		<div class="modal fade" id="disclaimerModal" tabindex="-1" aria-labelledby="disclaimerModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="disclaimerModalLabel">Disclaimer</h5>
+					</div>
+					<div class="modal-body">
+						<p>Before continuing, please be advised of the following:</p>
+						<ul>
+							<li>The Atlas contains user-submitted descriptions which may be inaccurate. Many lack descriptions ("FIXME"), in which case you are encouraged to submit one.</li>
+							<li>This project is not affiliated with Wplace or the Place Atlas Initiative. It aims to display art in the <a href="https://seal.hakase.life/">SEAL template collection</a>, not the exact state of the Wplace canvas.</li>
+							<li>Descriptions try to avoid spoilers for media when reasonable, but external links do not. Viewer discretion is advised.</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="acceptDisclaimer">I Understand</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 		<script src="./_js/lib/pointInPolygon.js"></script>
