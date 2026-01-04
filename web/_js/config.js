@@ -16,7 +16,7 @@ window.pageTitle = pageTitle
 
 const canvasSize = {
 	x: 1495,
-	y: 1729
+	y: 1755
 }
 window.canvasSize = canvasSize
 

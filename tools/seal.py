@@ -8,7 +8,7 @@ from oneoff.calculate_polygon import pongon
 top_left_tile = [1084,594]
 bottom_right_tile = [1086,595]
 canvas_offset = [0,0]
-canvas_crop = [926,33,1495,1729] # the first two (left,top) affect template locations, the last two (right,bottom) are actual crops
+canvas_crop = [926,33,1495,1755] # the first two (left,top) affect template locations, the last two (right,bottom) are actual crops
 # editables end here
 
 template_regex = re.compile(r"top\/(\d+) (\d+)\/(\d+) (\d+) (.+)")
