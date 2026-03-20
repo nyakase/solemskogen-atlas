@@ -11,7 +11,7 @@ canvas_offset = [0,0]
 canvas_crop = [926,33,1495,1755] # the first two (left,top) affect template locations, the last two (right,bottom) are actual crops
 # editables end here
 
-template_regex = re.compile(r"top\/(\d+) (\d+)\/(\d+) (\d+) (.+)")
+template_regex = re.compile(r"seal\/(\d+) (\d+)\/(\d+) (\d+) (.+)")
 canvas = Image.new("RGBA", [
 	(abs(bottom_right_tile[0] - top_left_tile[0])+1)*1000,
 	(abs(bottom_right_tile[1] - top_left_tile[1])+1)*1000
@@ -26,7 +26,7 @@ with open('web/atlas.json', 'r', encoding='utf-8') as atlas_file:
 			existing_atlas_seals.append(seal)
 
 # start processing tiles
-seal_zip = zipfile.ZipFile(io.BytesIO(requests.get("https://seal.hakase.life/?zip").content))
+seal_zip = zipfile.ZipFile(io.BytesIO(requests.get("https://shimmyfiles.hakase.life/seal?zip").content))
 for file in seal_zip.namelist():
 	template_data = template_regex.match(file)
 	if not template_data: 
